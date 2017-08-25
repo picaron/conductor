@@ -53,6 +53,7 @@ public class ElasticsearchModule extends AbstractModule {
 		
     	Settings.Builder settings = Settings.settingsBuilder();
         settings.put("client.transport.ignore_cluster_name", true);
+
         settings.put("client.transport.sniff", true);
         
         TransportClient tc = TransportClient.builder().settings(settings).build();
