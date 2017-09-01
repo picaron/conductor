@@ -1,0 +1,35 @@
+version: '2'
+services:
+  conductor-server:
+    environment:
+      - CONFIG_PROP=config-redis.properties
+    image: conductor:server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    links:
+      - elasticsearch:es
+      - redis-db:redis
+    depends_on:
+      - redis-db
+      - elasticsearch
+
+  conductor-ui:
+    environment:
+      - WF_SERVER=http://conductor-server:8080/api/
+    image: conductor:ui
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    links:
+      - conductor-server
+
+  redis-db:
+    image: redis 
+
+  elasticsearch:
+    image: elasticsearch:2.4
