@@ -406,7 +406,7 @@ public class HttpTask extends WorkflowSystemTask {
 		 * @return the OAuth consumer secret
 		 */
 		public String getOauthConsumerSecret() {
-			return oauthConsumerSecret;
+			return "*****";
 		}
 
 		/**
